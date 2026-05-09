@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
 import pickle
 import pandas as pd
 import sqlite3
@@ -63,6 +63,10 @@ def predict():
 
     except Exception as e:
         return str(e)
+
+@app.route('/google58a9c145bd498aaf.html')
+def google_verify():
+    return send_from_directory('static', 'google58a9c145bd498aaf.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
