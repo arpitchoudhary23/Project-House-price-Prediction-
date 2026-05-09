@@ -1,38 +1,36 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.pipeline import Pipeline
+from xgboost import XGBRegressor
 import pickle
 
-
-df = pd.read_csv("House Price Prediction Dataset.csv")
-df = df.dropna()
-
-df = pd.get_dummies(df, columns=['Location', 'Condition', 'Garage'])
+df = pd.read_csv("House Price Prediction Dataset.csv").dropna()
+df = df.drop("Id", axis=1)
 
 X = df.drop("Price", axis=1)
 y = df["Price"]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+categorical = ["Location", "Condition", "Garage"]
+
+preprocess = ColumnTransformer([
+    ("cat", OneHotEncoder(handle_unknown="ignore"), categorical)
+], remainder="passthrough")
+
+model = XGBRegressor(
+    n_estimators=800,
+    learning_rate=0.05,
+    max_depth=6
 )
 
-# Apply RobustScaler
-scaler = MinMaxScaler()
+pipeline = Pipeline([
+    ("preprocess", preprocess),
+    ("model", model)
+])
 
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+pipeline.fit(X, y)
 
-# Train model
-model = RandomForestRegressor(
-    n_estimators=300,
-    random_state=42
-)
+pickle.dump(pipeline, open("model.pkl", "wb"))
 
-model.fit(X_train_scaled, y_train)
-
-pickle.dump(model, open("model.pkl", "wb"))
-pickle.dump(scaler, open("scaler.pkl", "wb"))
-pickle.dump(X.columns, open("columns.pkl", "wb"))
-
-print("Model trained successfully!")
+print("Model trained correctly")

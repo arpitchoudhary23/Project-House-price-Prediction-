@@ -1,30 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>House Price Prediction</title>
+    <title>House Price Predictor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script>
+        function updateValue(id, val) {
+            document.getElementById(id).innerText = val;
+        }
+    </script>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h2>🏠 House Price Predictor</h2>
+    <h1>🏠House Price Predictor</h1>
+    <p class="subtitle">Enter details to estimate property price instantly</p>
 
-    <form action="/predict" method="POST">
+    <form action="/predict" method="POST" class="card">
 
-        <input type="text" name="area" placeholder="Area"><br>
-        <input type="text" name="bedrooms" placeholder="Bedrooms"><br>
-        <input type="text" name="bathrooms" placeholder="Bathrooms"><br>
-        <input type="text" name="floors" placeholder="Floors"><br>
-        <input type="text" name="yearbuilt" placeholder="Year Built"><br>
+        <label>Area (sq ft): <span id="area_val">1000</span></label>
+        <input type="range" name="area" min="300" max="10000" value="1000"
+               oninput="updateValue('area_val', this.value)" required>
+
+        <label>Bedrooms: <span id="bed_val">2</span></label>
+        <input type="range" name="bedrooms" min="1" max="10" value="2"
+               oninput="updateValue('bed_val', this.value)" required>
+
+        <label>Bathrooms: <span id="bath_val">2</span></label>
+        <input type="range" name="bathrooms" min="1" max="10" value="2"
+               oninput="updateValue('bath_val', this.value)" required>
+
+        <label>Floors: <span id="floor_val">1</span></label>
+        <input type="range" name="floors" min="1" max="5" value="1"
+               oninput="updateValue('floor_val', this.value)" required>
+
+        <label>Year Built</label>
+        <input type="number" name="yearbuilt" placeholder="e.g. 2015" required>
+
+        <label>Location</label>
+        <select name="location" required>
+            <option value="">Select</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Chennai">Chennai</option>
+        </select>
+
+        <label>Condition</label>
+        <select name="condition" required>
+            <option value="">Select</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Average">Average</option>
+            <option value="Poor">Poor</option>
+        </select>
+
+        <label>Garage</label>
+        <select name="garage" required>
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
 
         <button type="submit">Predict Price</button>
 
     </form>
 
     {% if prediction_text %}
-    <div class="result">
+    <div class="result-card">
         {{ prediction_text }}
     </div>
     {% endif %}
