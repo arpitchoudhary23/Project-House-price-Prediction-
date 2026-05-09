@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import MinMaxScaler
 import pickle
 
 
@@ -10,7 +10,6 @@ df = df.dropna()
 
 df = pd.get_dummies(df, columns=['Location', 'Condition', 'Garage'])
 
-# Features and target
 X = df.drop("Price", axis=1)
 y = df["Price"]
 
@@ -19,7 +18,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Apply RobustScaler
-scaler = RobustScaler()
+scaler = MinMaxScaler()
 
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
