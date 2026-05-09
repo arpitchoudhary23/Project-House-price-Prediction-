@@ -1,85 +1,79 @@
-/* Background */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #928DAB);
     margin: 0;
     padding: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Container box */
-.container {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    width: 400px;
     text-align: center;
-    transition: 0.3s;
+    color: white;
 }
 
-.container:hover {
-    transform: scale(1.02);
+.container {
+    padding: 30px;
 }
 
-/* Heading */
-h2 {
+h1 {
+    margin-top: 20px;
+}
+
+.subtitle {
+    opacity: 0.8;
     margin-bottom: 20px;
-    font-size: 24px;
 }
 
-/* Input fields */
-input {
-    width: 90%;
-    padding: 10px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s;
+.card {
+    background: white;
+    color: black;
+    width: 420px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
 }
 
-input:focus {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #00c6ff;
-}
-
-/* Button */
-button {
-    width: 95%;
-    padding: 12px;
+label {
+    display: block;
     margin-top: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #00c853;
     border: none;
-    border-radius: 8px;
-    background: #00c6ff;
     color: white;
     font-size: 16px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 button:hover {
-    background: #0072ff;
-    transform: scale(1.05);
+    background: #00b34a;
 }
 
-/* Result box */
-.result {
+.result-card {
     margin-top: 20px;
-    padding: 10px;
-    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    background: #ffffff;
+    color: black;
+    width: 420px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 10px;
     font-size: 18px;
-    animation: fadeIn 1s ease-in-out;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    font-weight: bold;
 }

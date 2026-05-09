@@ -12,6 +12,9 @@ def init_db():
         bathrooms REAL,
         floors REAL,
         yearbuilt REAL,
+        location TEXT,
+        condition TEXT,
+        garage TEXT,
         predicted_price REAL
     )
     """)
